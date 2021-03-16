@@ -1,8 +1,40 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import wemimoImage from './images/Adewemimo-abiona.png'
 
-/*const header = (
+const hexaColor = () => {
+  let str = '0123456789abcdef'
+  let color = ''
+  for (let i = 0; i < 6; i++) {
+    let index = Math.floor(Math.random() * str.length)
+    color += str[index]
+  }
+  return '#' + color
+}
+
+const HexaColor = () => {
+  return (
+    <div className="button-wrapper">
+      <div className="button" style = {{backgroundColor: `${hexaColor()}`}}>{hexaColor()}</div>
+      <div className="button" style = {{backgroundColor: `${hexaColor()}`}}>{hexaColor()}</div>
+      <div className="button" style = {{backgroundColor: `${hexaColor()}`}}>{hexaColor()}</div>
+      <div className="button" style = {{backgroundColor: `${hexaColor()}`}}>{hexaColor()}</div>
+      <div className="button" style = {{backgroundColor: `${hexaColor()}`}}>{hexaColor()}</div>
+      <div className="button" style = {{backgroundColor: `${hexaColor()}`}}>{hexaColor()}</div>
+    </div>
+  )
+}
+
+const rootElement = document.getElementById('root')
+// we render the App component using the ReactDOM package
+ReactDOM.render(<HexaColor />, rootElement)
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+//reportWebVitals(); */
+
+/*
+DAY 2 LEVEL 1
+const header = (
 <header className="header-wrapper">
   <h1>SUBSCRIBE</h1>
   <h3>Sign up with your email address to receive news and updates</h3>
@@ -24,7 +56,9 @@ const app = (
     {header}
     {main}
   </div>
-) 
+) */
+/*
+DAY 3 LEVEL 1
 const header = (
   <header className='header-wrapper'>
     <h1>Welcome to 30 Days Of React</h1>
@@ -73,6 +107,10 @@ const app = (
     
   </div>
 ) */
+
+/*import wemimoImage from './images/Adewemimo-abiona.png'
+
+
 
 const user = (
   <div>
@@ -131,12 +169,4 @@ const app = (
     {buttons}
     {footer}
   </div>
-)
-const rootElement = document.getElementById('root')
-
-ReactDOM.render(app, rootElement);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-//reportWebVitals(); */
+) */
