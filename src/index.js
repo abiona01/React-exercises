@@ -10,7 +10,6 @@ const hexaColor = () => {
   }
   return '#' + color
 }
-<<<<<<< HEAD
 
 const HexaColor = () => {
   return (
@@ -22,7 +21,8 @@ const HexaColor = () => {
       <div className="button" style = {{backgroundColor: `${hexaColor()}`}}>{hexaColor()}</div>
       <div className="button" style = {{backgroundColor: `${hexaColor()}`}}>{hexaColor()}</div>
     </div>
-  )
+
+)
 }
 
 const rootElement = document.getElementById('root')
@@ -95,7 +95,6 @@ const footer = (
   <footer>
   <div className='footer-wrapper'>
     <p>Copyright 2021</p>
-=======
 const HexaColor = () => {
   return (
     <div className="button-wrapper">
@@ -105,11 +104,9 @@ const HexaColor = () => {
       <div className = "button" style = {{backgroundColor: `${hexaColor()}`}}>{hexaColor()}</div>
       <div className = "button" style = {{backgroundColor: `${hexaColor()}`}}>{hexaColor()}</div>
       <div className = "button" style = {{backgroundColor: `${hexaColor()}`}}>{hexaColor()}</div>
->>>>>>> c8948457779a2f4ea26e6b0250b40b284612c096
     </div>
     )
     
-<<<<<<< HEAD
   </div>
 ) */
 
@@ -175,10 +172,3 @@ const app = (
     {footer}
   </div>
 ) */
-=======
-}
-
-const rootElement = document.getElementById('root')
-// we render the App component using the ReactDOM package
-ReactDOM.render(<HexaColor />, rootElement)
->>>>>>> c8948457779a2f4ea26e6b0250b40b284612c096
