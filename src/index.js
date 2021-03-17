@@ -1,99 +1,110 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+// class based component
+class Header extends React.Component {
+  constructor(props) {
+    super(props)
+    // the code inside the constructor run before any other code
+  }
+  render() {
+    console.log(this.props.data)
+    const {
+      welcome,
+      title,
+      subtitle,
+      author: { firstName, lastName },
+      date,
+    } = this.props.data
 
-const colorNumber = () => {
-  let num = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
-  let color = '';
-  for (let i = 0; i < num.length; i++) {
-    if(num % 2 === 0) {
-      color = `#00FF00`;
-      return num;
-    } else if(num %  2 !== 0) {
-      color = `#FFFF00`;
-      return num;
+    return (
+      <header>
+        <div className='header-wrapper'>
+          <h1>{welcome}</h1>
+          <h2>{title}</h2>
+          <h3>{subtitle}</h3>
+          <p>
+            {firstName} {lastName}
+          </p>
+          <small>{date}</small>
+        </div>
+      </header>
+    )
+  }
+}
+
+// TechList Component
+// class base component
+class TechList extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+  render() {
+    const { techs } = this.props
+    const techsFormatted = techs.map((tech) => <li key={tech}>{tech}</li>)
+    return techsFormatted
+  }
+}
+
+// Main Component
+// Class Component
+class Main extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+  render() {
+    return (
+      <main>
+        <div className='main-wrapper'>
+          <p>Prerequisite to get started react.js:</p>
+          <ul>
+            <TechList techs={this.props.techs} />
+          </ul>
+        </div>
+      </main>
+    )
+  }
+}
+
+// Footer Component
+// Class component
+class Footer extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+  render() {
+    return (
+      <footer>
+        <div className='footer-wrapper'>
+          <p>Copyright {this.props.date.getFullYear()}</p>
+        </div>
+      </footer>
+    )
+  }
+}
+
+class App extends React.Component {
+  render() {
+    const data = {
+      welcome: 'Welcome to 30 Days Of React',
+      title: 'Getting Started React',
+      subtitle: 'JavaScript Library',
+      author: {
+        firstName: 'Asabeneh',
+        lastName: 'Yetayeh',
+      },
+      date: 'Oct 7, 2020',
     }
+    const techs = ['HTML', 'CSS', 'JavaScript']
+
+    return (
+      <div className='app'>
+        <Header data={data} />
+        <Main techs={techs} />
+        <Footer date={new Date()} />
+      </div>
+    )
   }
 }
-const Main = () => {
-  return (
-    <div className="grid-container">
-      <div className="button" style={{backgroundColor: `${colorNumber()}`}}>{colorNumber()}</div>
-      <div className="button" style={{backgroundColor: `${colorNumber()}`}}>{colorNumber()}</div>
-      <div className="button" style={{backgroundColor: `${colorNumber()}`}}>{colorNumber()}</div>
-      <div className="button" style={{backgroundColor: `${colorNumber()}`}}>{colorNumber()}</div>
-      <div className="button" style={{backgroundColor: `${colorNumber()}`}}>{colorNumber()}</div>
-      <div className="button" style={{backgroundColor: `${colorNumber()}`}}>{colorNumber()}</div>
-      <div className="button" style={{backgroundColor: `${colorNumber()}`}}>{colorNumber()}</div>
-      <div className="button" style={{backgroundColor: `${colorNumber()}`}}>{colorNumber()}</div>
-      <div className="button" style={{backgroundColor: `${colorNumber()}`}}>{colorNumber()}</div>
-      <div className="button" style={{backgroundColor: `${colorNumber()}`}}>{colorNumber()}</div>
-      <div className="button" style={{backgroundColor: `${colorNumber()}`}}>{colorNumber()}</div>
-      <div className="button" style={{backgroundColor: `${colorNumber()}`}}>{colorNumber()}</div>
-      <div className="button" style={{backgroundColor: `${colorNumber()}`}}>{colorNumber()}</div>
-      <div className="button" style={{backgroundColor: `${colorNumber()}`}}>{colorNumber()}</div>
-    </div>
-  )
-}
+
 const rootElement = document.getElementById('root')
-// we render the App component using the ReactDOM package
-ReactDOM.render(<Main />, rootElement)
-
-
-/*DAY 6 LEVEL 2
-const Main = () => {
-  return (
-    <div className="main-div">
-      <h1>30 DAYS OF REACT</h1>
-      <p>Hexadecimal Colors</p>
-    </div>
-  )
-}
-const hexaColor = () => {
-  let str = '0123456789abcdef'
-  let color = ''
-  for (let i = 0; i < 6; i++) {
-    let index = Math.floor(Math.random() * str.length)
-    color += str[index]
-  }
-  return '#' + color
-}
-
-const HexaColor = () => {
-  return (
-    <div className="grid-container">
-      <div className="buttons" style = {{backgroundColor: `${hexaColor()}`}}>{hexaColor()}</div>
-      <div className="buttons" style = {{backgroundColor: `${hexaColor()}`}}>{hexaColor()}</div>
-      <div className="buttons" style = {{backgroundColor: `${hexaColor()}`}}>{hexaColor()}</div>
-      <div className="buttons" style = {{backgroundColor: `${hexaColor()}`}}>{hexaColor()}</div>
-      <div className="buttons" style = {{backgroundColor: `${hexaColor()}`}}>{hexaColor()}</div>
-      <div className="buttons" style = {{backgroundColor: `${hexaColor()}`}}>{hexaColor()}</div>
-      <div className="buttons" style = {{backgroundColor: `${hexaColor()}`}}>{hexaColor()}</div>
-      <div className="buttons" style = {{backgroundColor: `${hexaColor()}`}}>{hexaColor()}</div>
-      <div className="buttons" style = {{backgroundColor: `${hexaColor()}`}}>{hexaColor()}</div>
-      <div className="buttons" style = {{backgroundColor: `${hexaColor()}`}}>{hexaColor()}</div>
-      <div className="buttons" style = {{backgroundColor: `${hexaColor()}`}}>{hexaColor()}</div>
-      <div className="buttons" style = {{backgroundColor: `${hexaColor()}`}}>{hexaColor()}</div>
-      <div className="buttons" style = {{backgroundColor: `${hexaColor()}`}}>{hexaColor()}</div>
-      <div className="buttons" style = {{backgroundColor: `${hexaColor()}`}}>{hexaColor()}</div>
-      <div className="buttons" style = {{backgroundColor: `${hexaColor()}`}}>{hexaColor()}</div>
-      <div className="buttons" style = {{backgroundColor: `${hexaColor()}`}}>{hexaColor()}</div>
-      <div className="buttons" style = {{backgroundColor: `${hexaColor()}`}}>{hexaColor()}</div>
-      <div className="buttons" style = {{backgroundColor: `${hexaColor()}`}}>{hexaColor()}</div>
-      <div className="buttons" style = {{backgroundColor: `${hexaColor()}`}}>{hexaColor()}</div>
-      <div className="buttons" style = {{backgroundColor: `${hexaColor()}`}}>{hexaColor()}</div>
-      <div className="buttons" style = {{backgroundColor: `${hexaColor()}`}}>{hexaColor()}</div>
-      <div className="buttons" style = {{backgroundColor: `${hexaColor()}`}}>{hexaColor()}</div>
-      <div className="buttons" style = {{backgroundColor: `${hexaColor()}`}}>{hexaColor()}</div>
-      <div className="buttons" style = {{backgroundColor: `${hexaColor()}`}}>{hexaColor()}</div>
-    </div>
-  )
-}
-
-const App =() => {
-  return (
-    <div>
-      <Main />
-      <HexaColor />
-    </div>
-  )
-} */
+ReactDOM.render(<App />, rootElement)
