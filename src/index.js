@@ -1,42 +1,63 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-const colorNumber = () => {
-  let num = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
-  let color = '';
-  for (let i = 0; i < num.length; i++) {
-    if(num % 2 === 0) {
-      color = `#00FF00`;
-      return num;
-    } else if(num %  2 !== 0) {
-      color = `#FFFF00`;
-      return num;
+function isPrime(num) {
+  var sqrtnum=Math.floor(Math.sqrt(num));
+    var prime = num !== 1;
+    for(var i=2; i<sqrtnum+1; i++) { // sqrtnum+1
+        if(num % i === 0) {
+            prime = false;
+            break;
+        }
     }
-  }
+    return prime;
 }
-const Main = () => {
+const Box = (props)=>{
+  const [number, color] = props.box;
+  return (
+    <div className ="button" style={{backgroundColor: color}}>
+      {number}
+    </div>
+  )
+}
+const Numbers = (props) => {
+  const {...objArr} = props.objArr
+  let jsx = Object.entries(objArr).map((numCol, i)=>{
+    return(
+      <Box box={numCol} key = {i} />
+    )
+  })
   return (
     <div className="grid-container">
-      <div className="button" style={{backgroundColor: `${colorNumber()}`}}>{colorNumber()}</div>
-      <div className="button" style={{backgroundColor: `${colorNumber()}`}}>{colorNumber()}</div>
-      <div className="button" style={{backgroundColor: `${colorNumber()}`}}>{colorNumber()}</div>
-      <div className="button" style={{backgroundColor: `${colorNumber()}`}}>{colorNumber()}</div>
-      <div className="button" style={{backgroundColor: `${colorNumber()}`}}>{colorNumber()}</div>
-      <div className="button" style={{backgroundColor: `${colorNumber()}`}}>{colorNumber()}</div>
-      <div className="button" style={{backgroundColor: `${colorNumber()}`}}>{colorNumber()}</div>
-      <div className="button" style={{backgroundColor: `${colorNumber()}`}}>{colorNumber()}</div>
-      <div className="button" style={{backgroundColor: `${colorNumber()}`}}>{colorNumber()}</div>
-      <div className="button" style={{backgroundColor: `${colorNumber()}`}}>{colorNumber()}</div>
-      <div className="button" style={{backgroundColor: `${colorNumber()}`}}>{colorNumber()}</div>
-      <div className="button" style={{backgroundColor: `${colorNumber()}`}}>{colorNumber()}</div>
-      <div className="button" style={{backgroundColor: `${colorNumber()}`}}>{colorNumber()}</div>
-      <div className="button" style={{backgroundColor: `${colorNumber()}`}}>{colorNumber()}</div>
+      {jsx}
+    </div>
+  )
+}
+const App = () => {
+  let objArr = {}
+  for (let i = 0; i <= 31; i++){
+    if (isPrime(i)) {
+      objArr[i] = 'red';
+    } 
+    else if(i % 2 === 0) {
+      objArr[i] = 'green';
+    } else{
+      objArr[i] = 'yellow'
+    } 
+  }
+  return (
+    <div className = 'container'>
+      <header className="header-wrapper">
+        <h1>30 Days of React</h1>
+        <h5>Number Generator</h5>
+      </header>
+      <Numbers objArr= {objArr} />
     </div>
   )
 }
 const rootElement = document.getElementById('root')
 // we render the App component using the ReactDOM package
-ReactDOM.render(<Main />, rootElement)
+ReactDOM.render(<App />, rootElement)
 
 
 /*DAY 6 LEVEL 2
