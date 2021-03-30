@@ -1,9 +1,9 @@
 /**.darkmode{
     background: #000;
     color: #fff;
-    } */
-
-.container {
+    } 
+*/
+/**.container {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     line-height: 1.5;
     width: 30%;
@@ -43,3 +43,4 @@ button {
     text-align: center;
     padding: 10px;
 }
+*/
