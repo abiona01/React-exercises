@@ -1,46 +1,8 @@
-/**.darkmode{
-    background: #000;
-    color: #fff;
-    } 
-*/
-/**.container {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    line-height: 1.5;
-    width: 30%;
-    margin: auto;
+.container {
+    background-color: rgb(75, 235, 247);
+    width: 35%;
+    height: 70px;
 }
-.flex-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+.container h1 {
+    padding: 15px;
 }
-.country-name {
-    text-transform: uppercase;
-}
-.country-info {
-    margin-left: 20px;
-}
-.image-div {
-    margin-top: 10px;
-}
-img {
-    width: 200px;
-    height: 150px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-button {
-    height: 30px;
-    border-radius: 5%;
-    cursor: pointer;
-    outline: none;
-    border: 0;
-    background-color: rgb(41, 205, 235);
-    color: white;
-    font-size: 1rem;
-}
-.button-div {
-    text-align: center;
-    padding: 10px;
-}
-*/
