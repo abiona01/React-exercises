@@ -59,3 +59,41 @@ export default class  App extends Component {
  }
  
 }*/
+/*
+import axios from "axios";
+import { Component } from "react";
+import "./styles.css";
+
+export default class App extends Component {
+  state = {
+    isLoading: true
+  };
+  componentDidMount() {
+    setTimeout(() => {
+      axios.get("https://jsonplaceholder.typicode.com/todos/").then((res) => {
+        this.setState({
+          data: res.data,
+          isLoading: false
+        });
+      });
+    }, 3000);
+  }
+  render() {
+    const { isLoading } = this.state;
+    return (
+      <div className="App">
+        {isLoading ? (
+          <div>
+            <h1>Loading...</h1>
+          </div>
+        ) : (
+          <div>
+            <h1>Hello CodeSandbox</h1>
+            <h2>Start editing to see some magic happen!</h2>
+          </div>
+        )}
+      </div>
+    );
+  }
+}
+*/
