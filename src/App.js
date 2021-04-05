@@ -6,8 +6,8 @@ export default class App extends Component {
     isLoading: "Loading..."
   };
   onMouseEnter = () => {
-    let x = Math.random() * 500;
-    let y = Math.random() * 500;
+    let x = Math.random() * 700;
+    let y = Math.random() * 700;
     document.body.style.transform = `translate(${x}px, ${y}px)`;
   };
 
