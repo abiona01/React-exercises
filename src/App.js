@@ -1,23 +1,30 @@
-import { Component } from "react";
-import "./style.css";
+import React, { Component } from 'react'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+
+// Home component
+const Home = (props) => <h1>Welcome Home</h1>
+// About component
+const About = (props) => <h1>About Us</h1>
+// Contact component
+const Contact = (props) => <h1>Contact us</h1>
+// Challenge component
+const Challenges = (props) => (
+  <div>
+    <h1>30 Days Of React Challenge</h1>
+  </div>
+)
 
 export default class App extends Component {
-  state = {
-    isLoading: "Loading..."
-  };
-  onMouseEnter = () => {
-    let x = Math.random() * 700;
-    let y = Math.random() * 700;
-    document.body.style.transform = `translate(${x}px, ${y}px)`;
-  };
-
   render() {
     return (
-      <div className="App">
-        <div onMouseEnter={this.onMouseEnter} className="container">
-          <h1>30 Days Of React</h1>
+      <Router>
+        <div className='App'>
+          <Route path='/home' component={Home} />
+          <Route path='/about' component={About} />
+          <Route path='/contact' component={Contact} />
+          <Route path='/challenges' component={Challenges} />
         </div>
-      </div>
-    );
+      </Router>
+    )
   }
 }
