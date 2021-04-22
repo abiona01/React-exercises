@@ -5,8 +5,8 @@ import axios from 'axios'
   constructor(props) {
     super(props)
     this.state = {
-        data: [],
-        weight: ""
+        cat: [],
+        loading: true
     }
   }
   async componentDidMount () {
@@ -16,46 +16,35 @@ import axios from 'axios'
       const data = await response.data
       console.log(data)
       this.setState({
-        data,
+        cat: data[0], country: data[0]
       })
     } catch (error) {
       console.log(error)
     }
   }
-  fetchCat =async () => {
-    const url = ('https://api.thecatapi.com/v1/breeds')
-    const response = await axios.get(url)
-    const data = await response.data;
-    for(let i = 0; i < data.length; i++) {
-      let index = Math.floor(Math.random() * data.length)
-    this.setState({ country: data[index]});
-      const weight = this.state.data[index].weight.metric;
-      const div = weight.split("-");
-      const one = parseInt(div[0]);
-      const two = parseInt(div[1]);
-      const sum = one + two
-      const ave = sum / 2
-      const totals = [];
-      const spin = totals.push(ave)
-      const final = this.setState ({weight: spin})
-      console.log(sum/2)
-      return (
-        <div>
-          <span>{final}.map({final} = <li>{final}</li>)</span>
-        </div>
-      )
-  
-  }
-}
   render() {
     return(
-      <div className="cat">
-        <p>There are {this.state.data.length} cats in total </p>
-        <div>
-          <p>{this.state.weight}</p>
+      <div className="container">
+        <div className="image-div">
+          <img src="{this.state.cat.image}" alt=""/>
         </div>
         <div>
-         <button onClick = {this.fetchCat}>Click me</button>
+          <p>{this.state.cat.name}</p>
+        </div>
+        <div>
+          <p>{this.state.cat.origin}</p>
+        </div>
+        <div>
+          <p>{this.state.cat.temperament}</p>
+        </div>
+        <div>
+          <p>{this.state.cat.weight[1]}KG</p>
+        </div>
+        <div>
+          <p>{this.state.cat.life_span} </p>
+        </div>
+        <div>
+          <p> {this.state.cat.description}</p>
         </div>
       </div>
     )
