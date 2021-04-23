@@ -2,12 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 //import App from './example.js';
-import Cat from './App.js'
+import Header from './components/Header.js'
+import App from './App.js'
 //import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Cat />
+    <Header />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );

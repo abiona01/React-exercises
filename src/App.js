@@ -1,12 +1,36 @@
 import React from 'react'
 import axios from 'axios'
+import './index.css';
 
- export default class Cat extends React.Component {
+const Cats = ({cat: {name, image, origin, weight, life_span, temperament, description} }) => {
+  return (
+    <div className="container">
+          <div className="image-div">
+            <img src={image?.url} loading="lazy" alt={name} />
+          </div>
+          <div className="text-content">
+          <div className="cat-name">
+            <p>{name}</p>
+          </div>
+          <p className="cat-origin"><strong>{origin}</strong></p>
+          <div className="cat-attributes">
+            <p><span>Temperament:</span> {temperament}</p>
+            <p><span>Weight:</span> {weight.metric}KG</p>
+            <p><span>Lifespan:</span> {life_span} </p>
+          </div>
+          <div className="cat-description">
+            <p><span>Description</span></p>
+            <p>{description}</p>
+          </div>
+          </div>
+        </div>
+  )
+}
+ export default class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-        cat: [],
-        loading: true
+        data: []
     }
   }
   async componentDidMount () {
@@ -16,7 +40,7 @@ import axios from 'axios'
       const data = await response.data
       console.log(data)
       this.setState({
-        cat: data[0], country: data[0]
+        data,
       })
     } catch (error) {
       console.log(error)
@@ -24,78 +48,11 @@ import axios from 'axios'
   }
   render() {
     return(
-      <div className="container">
-        <div className="image-div">
-          <img src="{this.state.cat.image}" alt=""/>
-        </div>
-        <div>
-          <p>{this.state.cat.name}</p>
-        </div>
-        <div>
-          <p>{this.state.cat.origin}</p>
-        </div>
-        <div>
-          <p>{this.state.cat.temperament}</p>
-        </div>
-        <div>
-          <p>{this.state.cat.weight[1]}KG</p>
-        </div>
-        <div>
-          <p>{this.state.cat.life_span} </p>
-        </div>
-        <div>
-          <p> {this.state.cat.description}</p>
-        </div>
-      </div>
+      <div className="cat-wrapper">
+        {this.state.data.map((cat, i) => (
+          <li key={i}><Cats cat={cat}/></li>
+        ))}
+      </div> 
     )
   }
 }
-/**async componentDidMount() {
-    const url = "https://restcountries.eu/rest/v2/all?fields=flag;name;capital;languages;population;currencies";
-    const response = await fetch(url);
-    const data = await response.json();
-    this.setState({ country: data[0], loading: false });
-    console.log(data)
-  }
-  fetchCountry =async () => {
-    const url = ("https://restcountries.eu/rest/v2/all?fields=flag;name;capital;languages;population;currencies")
-    const response = await fetch(url);
-    const data = await response.json();
-    for(let i = 0; i < data.length; i++) {
-      let index = Math.floor(Math.random() * data.length)
-    this.setState({ country: data[index]});
-    }
-  }
-  render() {
-    return (
-      <div>
-        {this.state.loading || !this.state.country ? (<div>loading...</div>) 
-        : (<div className="container">
-          <div className="flex-container">
-          <div className="image-div"><img src={this.state.country.flag} alt="country flag" /></div>
-          <div className="country-name">
-            <strong>{this.state.country.name}</strong>
-          </div>
-          </div>
-          <div className="country-info">
-          <div>
-            <strong>Capital:</strong> {this.state.country.capital}
-          </div>
-          <div>
-            <strong>Language:</strong> {this.state.country.languages[0].name}
-          </div>
-          <div>
-            <strong>Population:</strong> {this.state.country.population}
-          </div>
-          <div>
-            <strong>Currency:</strong> {this.state.country.currencies[0].name}
-          </div>
-          </div>
-          <div className="button-div">
-          <button onClick={this.fetchCountry}>Select Country</button>
-          </div>
-          </div>
-        )}
-      </div>
-    );
-  } */
