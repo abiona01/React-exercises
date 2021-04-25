@@ -30,7 +30,8 @@ const Cats = ({cat: {name, image, origin, weight, life_span, temperament, descri
   constructor(props) {
     super(props)
     this.state = {
-        data: []
+        data: [],
+        tempData: []
     }
   }
   async componentDidMount () {
@@ -39,12 +40,47 @@ const Cats = ({cat: {name, image, origin, weight, life_span, temperament, descri
       const response = await axios.get(url)
       const data = await response.data
       console.log(data)
+      const modifyData = await Promise.all(
+        data.map(async (cat) => {
+          let url = await axios.get(
+            `https://api.thecatapi.com/v1/images/search?breed_id=${cat.id}`
+          )
+          let image = await url.data[0].url
+
+          cat.url = image
+          return cat
+        })
+      )
+
       this.setState({
-        data,
+        data: modifyData,
+        tempData: modifyData,
       })
     } catch (error) {
       console.log(error)
     }
+  }
+  filterCats = () => {
+    const filteredCats = []
+    console.log(this.state.data)
+    const countries = this.state.data.map(({ origin }) => origin)
+    const setCountries = new Set(countries)
+    for (let country of setCountries) {
+      const countryList = this.state.data.filter(
+        ({ origin }) => origin = country
+      )
+      filteredCats.push(countryList)
+    }
+    const sortedCats = [...filteredCats].sort((a, b) => {
+      return a.length - b.length
+    })
+    return sortedCats
+  }
+  handleCatFilter = (org) => {
+    const countryList = this.state.data.filter(({ origin }) => origin = org)
+    this.setState({
+      tempData: countryList,
+    })
   }
   render() {
     return(
