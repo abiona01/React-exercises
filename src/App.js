@@ -15,7 +15,7 @@ const Cats = ({cat: {name, image, origin, weight, life_span, temperament, descri
           <p className="cat-origin"><strong>{origin}</strong></p>
           <div className="cat-attributes">
             <p><span>Temperament:</span> {temperament}</p>
-            <p><span>Weight:</span> {weight.metric}KG</p>
+            <p><span>Weight:</span> {weight?.metric}KG</p>
             <p><span>Lifespan:</span> {life_span} </p>
           </div>
           <div className="cat-description">
@@ -26,6 +26,7 @@ const Cats = ({cat: {name, image, origin, weight, life_span, temperament, descri
         </div>
   )
 }
+
  export default class App extends React.Component {
   constructor(props) {
     super(props)
@@ -67,7 +68,7 @@ const Cats = ({cat: {name, image, origin, weight, life_span, temperament, descri
     const setCountries = new Set(countries)
     for (let country of setCountries) {
       const countryList = this.state.data.filter(
-        ({ origin }) => origin = country
+        ({ origin }) => origin === country
       )
       filteredCats.push(countryList)
     }
@@ -77,17 +78,35 @@ const Cats = ({cat: {name, image, origin, weight, life_span, temperament, descri
     return sortedCats
   }
   handleCatFilter = (org) => {
-    const countryList = this.state.data.filter(({ origin }) => origin = org)
+    const countryList = this.state.data.filter(({ origin }) => origin === org)
     this.setState({
       tempData: countryList,
+    })
+  }
+  handleAllCats = () => {
+    this.setState({
+      tempData: this.state.data,
     })
   }
   render() {
     return(
       <div className="cat-wrapper">
-        {this.state.data.map((cat, i) => (
-          <li key={i}><Cats cat={cat}/></li>
+        <div className='cats-nav'>
+                    {this.filterCats().map((c) => {
+                    return (
+                        <div onClick={() => this.handleCatFilter(c[0].origin)}>
+                            {c[0].origin}({c.length})
+                        </div>
+                    )
+                    })}
+                    {this.state.data.length > 0 && (
+                    <div onClick={this.handleAllCats}>All</div>
+                    )}
+        </div>
+        {this.state.data.map((cat) => (
+          <li key={cat.id}><Cats cat={cat}/></li>
         ))}
+        <Cats cat={this.state.tempData} />
       </div> 
     )
   }
