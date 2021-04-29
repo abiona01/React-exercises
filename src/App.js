@@ -30,7 +30,8 @@ const Cats = ({cat: {name, image, origin, weight, life_span, temperament, descri
   constructor(props) {
     super(props)
     this.state = {
-        data: []
+        data: [],
+        tempData: []
     }
   }
   async componentDidMount () {
