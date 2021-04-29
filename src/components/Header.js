@@ -2,18 +2,9 @@ import React from 'react'
 
 import {
     BrowserRouter as Router,
-    Route,
-    Switch,
     NavLink,
   } from 'react-router-dom'
   import { FaCat } from "react-icons/fa";
-
-  // Home component
-const Home = (props) => <h2> </h2>
-// About component
-const About = (props) => <h2> </h2>
-// Contact component
-const Dummy = (props) => <h2> </h2>
 
 const Challenges = (props) => (
     <div className="head">
@@ -24,7 +15,6 @@ const Challenges = (props) => (
               <NavLink to='/day-19'>&lt;&lt; Day 19</NavLink>
               </li>
           </ul>
-          <Route  path='/day-19' component={About} />
       </Router>
     </div>
   )
@@ -64,11 +54,7 @@ class Header extends React.Component {
         <Challenges />
     <Router>
         <Navbar />
-        <Switch>
-            <Route  path='/about' component={About} />
-            <Route  path='/dummy' component={Dummy} />
-            <Route  exact path='/' component={Home} />
-        </Switch>
+        
     </Router>
     <BottomHeader />
     </div>

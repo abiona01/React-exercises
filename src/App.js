@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import './index.css';
 
-const Cats = ({cat: {name, image, origin, weight, life_span, temperament, description} }) => {
+const Cat = ({cat: {name, image, origin, weight, life_span, temperament, description} }) => {
   return (
     <div className="container">
           <div className="image-div">
@@ -24,6 +24,19 @@ const Cats = ({cat: {name, image, origin, weight, life_span, temperament, descri
           </div>
           </div>
         </div>
+  )
+}
+const Cats = ({ cats }) => {
+  const catList = cats.map((cat) => (
+    <Cat key={cat.id} cat={cat} />
+  ))
+  if(cats.length > 0 ) {
+    return (
+      <div className="container">{catList}</div>
+    )
+  }
+  return (
+      <div className="container"></div>
   )
 }
 
@@ -103,10 +116,7 @@ const Cats = ({cat: {name, image, origin, weight, life_span, temperament, descri
                     <div onClick={this.handleAllCats}>All</div>
                     )}
         </div>
-        {this.state.data.map((cat) => (
-          <li key={cat.id}><Cats cat={cat}/></li>
-        ))}
-        <Cats cat={this.state.tempData} />
+        <Cats cats={this.state.tempData} />
       </div> 
     )
   }
