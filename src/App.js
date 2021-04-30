@@ -1,123 +1,222 @@
-import React from 'react'
-import axios from 'axios'
-import './index.css';
+import React, { useState } from 'react'
+import adewemimoImage from './images/Adewemimo-abiona.png'
+import './index.scss'
 
-const Cat = ({cat: {name, image, origin, weight, life_span, temperament, description} }) => {
+// Fuction to show month date year
+const showDate = (time) => {
+  const months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ]
+
+  const month = months[time.getMonth()].slice(0, 3)
+  const year = time.getFullYear()
+  const date = time.getDate()
+  return ` ${month} ${date}, ${year}`
+}
+
+// User Card Component
+const UserCard = ({ user: { firstName, lastName, image } }) => (
+  <div className='user-card'>
+    <img src={image} alt={firstName} />
+    <h2>
+      {firstName}
+      {lastName}
+    </h2>
+  </div>
+)
+
+// A button component
+const Button = ({ text, onClick, style }) => (
+  <button style={style} onClick={onClick}>
+    {text}
+  </button>
+)
+
+// CSS styles in JavaScript Object
+const buttonStyles = {
+  backgroundColor: '#61dbfb',
+  padding: 10,
+  border: 'none',
+  borderRadius: 5,
+  margin: 3,
+  cursor: 'pointer',
+  fontSize: 18,
+  color: 'white',
+}
+
+const Header = (props) => {
+  const {
+    welcome,
+    title,
+    subtitle,
+    author: { firstName, lastName },
+    date,
+  } = props.data
+
   return (
-    <div className="container">
-          <div className="image-div">
-            <img src={image?.url} loading="lazy" alt={name} />
-          </div>
-          <div className="text-content">
-          <div className="cat-name">
-            <p>{name}</p>
-          </div>
-          <p className="cat-origin"><strong>{origin}</strong></p>
-          <div className="cat-attributes">
-            <p><span>Temperament:</span> {temperament}</p>
-            <p><span>Weight:</span> {weight?.metric}KG</p>
-            <p><span>Lifespan:</span> {life_span} </p>
-          </div>
-          <div className="cat-description">
-            <p><span>Description</span></p>
-            <p>{description}</p>
-          </div>
-          </div>
-        </div>
+    <header style={props.styles}>
+      <div className='header-wrapper'>
+        <h1>{welcome}</h1>
+        <h2>{title}</h2>
+        <h3>{subtitle}</h3>
+        <p>
+          {firstName} {lastName}
+        </p>
+        <small>{date}</small>
+      </div>
+    </header>
   )
 }
-const Cats = ({ cats }) => {
-  const catList = cats.map((cat) => (
-    <Cat key={cat.id} cat={cat} />
-  ))
-  if(cats.length > 0 ) {
-    return (
-      <div className="container">{catList}</div>
-    )
-  }
+
+const Count = ({ count, addOne, minusOne }) => (
+  <div>
+    <h1>{count} </h1>
+    <div>
+      <Button text='+1' onClick={addOne} style={buttonStyles} />
+      <Button text='-1' onClick={minusOne} style={buttonStyles} />
+    </div>
+  </div>
+)
+
+// TechList Component
+const TechList = (props) => {
+  const { techs } = props
+  const techsFormatted = techs.map((tech) => <li key={tech}>{tech}</li>)
+  return techsFormatted
+}
+
+// Main Component
+const Main = (props) => {
+  const {
+    techs,
+    user,
+    greetPeople,
+    handleTime,
+    changeBackground,
+    count,
+    addOne,
+    minusOne,
+  } = props
   return (
-      <div className="container"></div>
+    <main>
+      <div className='main-wrapper'>
+        <p>Prerequisite to get started react.js:</p>
+        <ul>
+          <TechList techs={techs} />
+        </ul>
+        <UserCard user={user} />
+        <Button
+          text='Greet People'
+          onClick={greetPeople}
+          style={buttonStyles}
+        />
+        <Button text='Show Time' onClick={handleTime} style={buttonStyles} />
+        <Button
+          text='Change Background'
+          onClick={changeBackground}
+          style={buttonStyles}
+        />
+        <Count count={count} addOne={addOne} minusOne={minusOne} />
+      </div>
+    </main>
   )
 }
 
- export default class App extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-        data: [],
-        tempData: []
-    }
-  }
-  async componentDidMount () {
-    const url = 'https://api.thecatapi.com/v1/breeds'
-    try {
-      const response = await axios.get(url)
-      const data = await response.data
-      console.log(data)
-      const modifyData = await Promise.all(
-        data.map(async (cat) => {
-          let url = await axios.get(
-            `https://api.thecatapi.com/v1/images/search?breed_id=${cat.id}`
-          )
-          let image = await url.data[0].url
-
-          cat.url = image
-          return cat
-        })
-      )
-
-      this.setState({
-        data: modifyData,
-        tempData: modifyData,
-      })
-    } catch (error) {
-      console.log(error)
-    }
-  }
-  filterCats = () => {
-    const filteredCats = []
-    console.log(this.state.data)
-    const countries = this.state.data.map(({ origin }) => origin)
-    const setCountries = new Set(countries)
-    for (let country of setCountries) {
-      const countryList = this.state.data.filter(
-        ({ origin }) => origin === country
-      )
-      filteredCats.push(countryList)
-    }
-    const sortedCats = [...filteredCats].sort((a, b) => {
-      return a.length - b.length
-    })
-    return sortedCats
-  }
-  handleCatFilter = (org) => {
-    const countryList = this.state.data.filter(({ origin }) => origin === org)
-    this.setState({
-      tempData: countryList,
-    })
-  }
-  handleAllCats = () => {
-    this.setState({
-      tempData: this.state.data,
-    })
-  }
-  render() {
-    return(
-      <div className="cat-wrapper">
-        <div className='cats-nav'>
-                    {this.filterCats().map((c) => {
-                    return (
-                        <div onClick={() => this.handleCatFilter(c[0].origin)}>
-                            {c[0].origin}({c.length})
-                        </div>
-                    )
-                    })}
-                    {this.state.data.length > 0 && (
-                    <div onClick={this.handleAllCats}>All</div>
-                    )}
-        </div>
-        <Cats cats={this.state.tempData} />
-      </div> 
-    )
-  }
+// Footer Component
+const Footer = (props) => {
+  return (
+    <footer>
+      <div className='footer-wrapper'>
+        <p>Copyright {props.date.getFullYear()}</p>
+      </div>
+    </footer>
+  )
 }
+
+const App = (props) => {
+  const [count, setCount] = useState(0)
+  const [backgroundColor, setBackgroundColor] = useState('')
+
+  const showDate = (time) => {
+    const months = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+    ]
+
+    const month = months[time.getMonth()].slice(0, 3)
+    const year = time.getFullYear()
+    const date = time.getDate()
+    return ` ${month} ${date}, ${year}`
+  }
+  const addOne = () => {
+    setCount(count + 1)
+  }
+
+  // method which subtract one to the state
+  const minusOne = () => {
+    setCount(count - 1)
+  }
+  const handleTime = () => {
+    alert(showDate(new Date()))
+  }
+  const greetPeople = () => {
+    alert('Welcome to 30 Days Of React Challenge, 2020')
+  }
+  const changeBackground = () => {}
+
+  const data = {
+    welcome: 'Welcome to 30 Days Of React',
+    title: 'Getting Started React',
+    subtitle: 'JavaScript Library',
+    author: {
+      firstName: 'Asabeneh',
+      lastName: 'Yetayeh',
+    },
+    date: 'Oct 7, 2020',
+  }
+  const techs = ['HTML', 'CSS', 'JavaScript']
+
+  const user = { ...data.author, image: adewemimoImage }
+
+  return (
+    <div className='app'>
+      {backgroundColor}
+      <Header data={data} />
+      <Main
+        user={user}
+        techs={techs}
+        handleTime={handleTime}
+        greetPeople={greetPeople}
+        changeBackground={changeBackground}
+        addOne={addOne}
+        minusOne={minusOne}
+        count={count}
+      />
+      <Footer date={new Date()} />
+    </div>
+  )
+}
+
+
+export default App
