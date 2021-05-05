@@ -1,12 +1,35 @@
 import React from 'react'
 import axios from 'axios'
 
+const Cats = ({cat: {weight, life_span}}) => {
+    const weights =() => {
+    const weight =  this.state.data.weight?.metric
+    .split(' - ')
+    .reduce((a,b) => +a + +b) / 2;
+    return {
+      weight: weight / 2
+    }
+    }
+    const ages =()=>{ 
+      const age = this.state.data.life_span
+    .split(' - ')
+    .reduce((a,b) => +a + +b);
+      return{
+        age: age / 2
+      }
+    }
+    return (
+      <div>
+        <p>{weights}</p>
+        <p>{ages}</p>
+      </div>
+    )
+  }
  export default class Cat extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
         data: [],
-        weight: ""
     }
   }
   async componentDidMount () {
@@ -16,35 +39,20 @@ import axios from 'axios'
       const data = await response.data
       console.log(data)
       this.setState({
-        data,
+        data
       })
     } catch (error) {
       console.log(error)
     }
   }
   fetchCat =async () => {
-    const url = ('https://api.thecatapi.com/v1/breeds')
+    const url = 'https://api.thecatapi.com/v1/breeds';
     const response = await axios.get(url)
     const data = await response.data;
     for(let i = 0; i < data.length; i++) {
       let index = Math.floor(Math.random() * data.length)
-    this.setState({ country: data[index]});
-      const weight = this.state.data[index].weight.metric;
-      const div = weight.split("-");
-      const one = parseInt(div[0]);
-      const two = parseInt(div[1]);
-      const sum = one + two
-      const ave = sum / 2
-      const totals = [];
-      const spin = totals.push(ave)
-      const final = this.setState ({weight: spin})
-      console.log(sum/2)
-      return (
-        <div>
-          <span>{final}.map({final} = <li>{final}</li>)</span>
-        </div>
-      )
-  
+    this.setState({ data: data[index]});
+      
   }
 }
   render() {
@@ -52,7 +60,7 @@ import axios from 'axios'
       <div className="cat">
         <p>There are {this.state.data.length} cats in total </p>
         <div>
-          <p>{this.state.weight}</p>
+          <Cats cat ={this.fetchCat}/>
         </div>
         <div>
          <button onClick = {this.fetchCat}>Click me</button>
