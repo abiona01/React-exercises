@@ -1,4 +1,5 @@
 import React, { useState, useEffect} from 'react'
+import useFetch from './useFetch.js'
 import { FaChartBar } from "react-icons/fa";
 
 const LanguageGraph = ({ data: { language, count } }) => (
@@ -74,135 +75,128 @@ const Country = ({ country: { name, capital, languages, flag, population, curren
 
 const App = (props) => {
   // setting initial state and method to update state
-  const [data, setData] = useState([])
   const [permData, setPermData] = useState([])
-  const [value, setValue] = useState('')
-  const [graph, setGraph] = useState('population')
-  const [flag, setFlag] = useState({
-    name: true,
-    capital: false,
-    population: false,
-  })
-
+    const [value, setValue] = useState('')
+    const [graph, setGraph] = useState('population')
+    const [flag, setFlag] = useState({
+      name: true,
+      capital: false,
+      population: false,
+    })
+  const url = 'https://restcountries.eu/rest/v2/all'
+  const data = useFetch(url);
   useEffect(() => {
-    ;(async function () {
-      let result = await fetchData()
-      let filteredCountries = filterCountries(result, value)
-      setPermData(result)
-      setData(filteredCountries)
-    })()
-  }, [value, flag, graph])
+  ;(async function () {
+    let result = await fetchData()
+    let filteredCountries = filterCountries(result, value)
+    setPermData(result)
+    setData(filteredCountries)
+  })()
+}, [value, flag, graph, url])
+
 
   const onChange = (e) => setValue(e.target.value)
 
-  const sortByName = (data) => {
-    let sortedCountries =
-      value === ''
-        ? reverseCountries(data)
-        : sortCountries(filterCountries(data, value), 'name')
-    setData(sortedCountries)
-  }
-  console.log(sortByName)
-  const sortByCapital = (data) => {
-    let sortedCountries =
-      value === ''
-        ? reverseCountries(data)
-        : sortCountries(filterCountries(data, value), 'capital')
-    if (flag.capital) {
-      setFlag({ ...flag, name: false, population: false })
-      setData(sortedCountries)
-    } else {
+  
+    const sortByName = (data) => {
+      let sortedCountries =
+        value === ''
+          ? reverseCountries(data)
+          : sortCountries(filterCountries(data, value), 'name')
       setData(sortedCountries)
     }
-  }
-  console.log(sortByCapital)
-
-  const sortByPopulation = () => {
-    let sortedCountries =
-      value === ''
-        ? reverseCountries(data)
-        : sortCountries(filterCountries(data, value), 'population')
-    setData(sortedCountries)
-  }
-  console.log(sortByPopulation)
-  const changeToPopulationGraph = () => {
-    setGraph('population')
-  }
-  const changeToLanguageGraph = () => {
-    setGraph('language')
-  }
-
-  const fetchData = async () => {
-    const url = 'https://restcountries.eu/rest/v2/all'
-    try {
-      const response = await fetch(url)
-      const data = await response.json()
-      return data
-    } catch (error) {
-      console.log(error)
-    }
-  }
-  /* === Sorting countries either by name, capital or population === */
-  const sortCountries = (arr, type) => {
-    const countries = [...arr]
-    const sortedCountries = countries.sort((a, b) => {
-      if (a[type] > b[type]) return -1
-      if (a[type] < b[type]) return 1
-      return 0
-    })
-    return sortedCountries
-  }
-  /* === Filter countries based on search input === */
-  const filterCountries = (arr, search) => {
-    let searchTerm = search.toLowerCase()
-    const filteredCountries = arr.filter((country) => {
-      const { name, capital, languages } = country
-      const isName = name.toLowerCase().includes(searchTerm)
-      const isCapital = capital.toLowerCase().includes(searchTerm)
-
-      const isLanguages = languages
-        .map(({ name }) => name)
-        .join()
-        .toLowerCase()
-        .includes(searchTerm)
-
-      return isName || isCapital || isLanguages
-    })
-    const result = search === '' ? arr : filteredCountries
-    return result
-  }
-  /* === Reverse countries array === */
-  const reverseCountries = (arr) => {
-    const countries = [...arr]
-    return countries.reverse()
-  }
-  /* create bar graph for language */
-  const countLanguages = (arr) => {
-    const langSet = new Set()
-    const allLangArr = []
-    const languageFrequency = []
-    arr.forEach((country) => {
-      let { languages } = country
-      for (const language of languages) {
-        allLangArr.push(language.name)
-        langSet.add(language.name)
+    console.log(sortByName)
+    const sortByCapital = (data) => {
+      let sortedCountries =
+        value === ''
+          ? reverseCountries(data)
+          : sortCountries(filterCountries(data, value), 'capital')
+      if (flag.capital) {
+        setFlag({ ...flag, name: false, population: false })
+        setData(sortedCountries)
+      } else {
+        setData(sortedCountries)
       }
-    })
-    for (const l of langSet) {
-      const countries = allLangArr.filter((lang) => lang === l)
-      languageFrequency.push({ language: l, count: countries.length })
     }
-    return languageFrequency
-  }
-
-  /*=== Ten most populated countries ===*/
-  const mostPopulatedCountries = sortCountries(data, 'population').slice(0, 10)
-
-  /*=== Ten most spoken language by region or by location ===*/
-  const mostSpokenLanguages = sortCountries(
-    countLanguages(data),
-    'count'
-  ).slice(0, 10)
+    console.log(sortByCapital)
+  
+    const sortByPopulation = () => {
+      let sortedCountries =
+        value === ''
+          ? reverseCountries(data)
+          : sortCountries(filterCountries(data, value), 'population')
+      setData(sortedCountries)
+    }
+    console.log(sortByPopulation)
+    const changeToPopulationGraph = () => {
+      setGraph('population')
+    }
+    const changeToLanguageGraph = () => {
+      setGraph('language')
+    }
+  
+    
+    /* === Sorting countries either by name, capital or population === */
+    const sortCountries = (arr, type) => {
+      const countries = [...arr]
+      const sortedCountries = countries.sort((a, b) => {
+        if (a[type] > b[type]) return -1
+        if (a[type] < b[type]) return 1
+        return 0
+      })
+      return sortedCountries
+    }
+    /* === Filter countries based on search input === */
+    const filterCountries = (arr, search) => {
+      let searchTerm = search.toLowerCase()
+      const filteredCountries = arr.filter((country) => {
+        const { name, capital, languages } = country
+        const isName = name.toLowerCase().includes(searchTerm)
+        const isCapital = capital.toLowerCase().includes(searchTerm)
+  
+        const isLanguages = languages
+          .map(({ name }) => name)
+          .join()
+          .toLowerCase()
+          .includes(searchTerm)
+  
+        return isName || isCapital || isLanguages
+      })
+      const result = search === '' ? arr : filteredCountries
+      return result
+    }
+    /* === Reverse countries array === */
+    const reverseCountries = (arr) => {
+      const countries = [...arr]
+      return countries.reverse()
+    }
+    /* create bar graph for language */
+    const countLanguages = (arr) => {
+      const langSet = new Set()
+      const allLangArr = []
+      const languageFrequency = []
+      arr.forEach((country) => {
+        let { languages } = country
+        for (const language of languages) {
+          allLangArr.push(language.name)
+          langSet.add(language.name)
+        }
+      })
+      for (const l of langSet) {
+        const countries = allLangArr.filter((lang) => lang === l)
+        languageFrequency.push({ language: l, count: countries.length })
+      }
+      return languageFrequency
+    }
+  
+    /*=== Ten most populated countries ===*/
+    const mostPopulatedCountries = sortCountries(data, 'population').slice(0, 10)
+  
+    /*=== Ten most spoken language by region or by location ===*/
+    const mostSpokenLanguages = sortCountries(
+      countLanguages(data),
+      'count'
+    ).slice(0, 10)
   const Header = () => {
     return (
       <header className="country-header">
