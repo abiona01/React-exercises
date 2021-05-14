@@ -43,7 +43,6 @@ span {
   font-size: 2rem;
   font-weight: 600;
   color: #616161;
-  font-style: italic;
 }
 .controls {
   margin: 0 auto;
@@ -60,6 +59,12 @@ span {
   font-size: 2rem;
   border-radius: 3rem;
   background: #faf6f6;
+}
+.feedback {
+  font-style: italic;
+  font-size: 2rem;
+  color: orange;
+  font-weight: 600;
 }
 .icon {
   font-size: 4rem;
