@@ -1,188 +1,60 @@
 body {
-    margin: 0;
-    font-family: "Roboto Slab";
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    box-sizing: border-box;
-    color: #283747!important;
-    background-color: rgb(253, 252, 252);
-    
-    overflow-x: hidden;
-  }
-  ::-webkit-scrollbar {
-    width: 15px;
+  margin: 0;
+  font-family: "Poppins", sans-serif, "Roboto Slab";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+  color: #283747 !important;
+  background-color: #f9fbfe;
+
+  overflow-x: hidden;
 }
-  ::-webkit-scrollbar-thumb {
-    background: #61dbfb;
-    border-radius: 10px;
+::-webkit-scrollbar {
+  width: 15px;
 }
-  ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px #00f;
-    background: #4776e6;
-    background: linear-gradient(90deg,#8e54e9,#4776e6);
-    border-radius: 10px;
+::-webkit-scrollbar-thumb {
+  background: #61dbfb;
+  border-radius: 10px;
 }
-.country-header {
-  background-color: #f0f0f0;
-  text-align: center;
-  width: 100%;
-  margin-top: -3rem;
-  padding-bottom: 2rem;
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px #00f;
+  background: #4776e6;
+  background: linear-gradient(90deg, #8e54e9, #4776e6);
+  border-radius: 10px;
 }
-h1 {
-  font-family: "Poppins",serif;
-  font-size: 4rem;
-  margin: .5rem auto;
-  letter-spacing: .25rem;
-  font-weight: 600;
-  color: orange;
-  padding-top: 4rem;
-  margin-bottom: -1rem;
-}
-span {
-  font-size: 2rem;
-  font-weight: 600;
-  color: #616161;
-}
-.controls {
+.title {
   margin: 0 auto;
   text-align: center;
+  line-height: 0.7;
 }
-.search-input {
-  color: orange;
-  width: 50%;
-  height: 5rem;
-  margin: 3rem auto;
-  text-indent: 2rem;
+h1 {
+  font-size: 5rem;
+  font-weight: 400;
+}
+p {
+  font-size: 2rem;
+}
+.gene {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-evenly;
+}
+input {
+  width: 60%;
+  color: #fff;
+  border: 1px #eadef5;
   outline: none;
-  border: .2rem solid #f8e7e7;
-  font-size: 2rem;
-  border-radius: 3rem;
-  background: #faf6f6;
+  border-radius: 5px;
 }
-.feedback {
-  font-style: italic;
-  font-size: 2rem;
-  color: orange;
-  font-weight: 600;
-}
-.icon {
-  font-size: 4rem;
-  color: orange;
-}
-  .countries-wrapper {
-    background: #f0f0f0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    justify-items: center;
-    margin: 1rem 0 3rem;
-    padding: 1rem;
-  }
-  .country {
-    max-width: 25rem;
-    min-width: 25rem;
-    text-align: center;
-    margin: .5rem;
-    padding: 1rem 0 1.5rem 0;
-    border-radius: .2rem;
-    background: #fff;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    transition: transform 0.5s;
-  }
-  .country:hover {
-    transform: scale(1.03);
-  }
-  .country_flag {
-    height: 12rem;
-    width: 15rem;
-    text-align: center;
-    margin: 0 auto;
-    margin-bottom: -5rem;
-  }
-  .country_flag img {
-    display: block;
-    margin: auto;
-    max-width: 75%;
-    max-height: 55%;
-    height: 100px;
-    border-radius: 5px;
-  }
-  .country_name {
-    font-size: 1.6rem;
-    color: orange;
-    letter-spacing: .075rem;
-    font-weight: bolder;
-    margin-bottom: 1rem;
-    text-align: center;
-    
-  }
-  .country p {
-    font-size: 1.6rem;
-    font-weight: 500;
-    padding-left: 2rem;
-    margin-bottom: -0.5rem;
-    color: #747474;
-    text-align: left;
-    letter-spacing: .05rem;
-}
-.country span {
-  font-weight: 600;
-  color: #616161;
-}
-.graph-wrapper {
-  margin-top: 4rem;
-  background-color: rgb(253, 252, 252);
-  box-shadow: 0 0 4px 1px rgb(51 51 51 / 20%);
-}
-.graph-buttons {
-  text-align: center;
-  padding-top: 1rem;
+input:hover {
+  background-color: rgb(252, 236, 252);
+  border: none;
 }
 button {
-  background-color: orange;
-  display: inline-block;
-  width: 13rem;
-  height: 3rem;
+  background-color: #595dff;
+  color: #fff;
+  padding: 1rem 5rem;
   border-radius: 5px;
   border: none;
-  outline: none;
-  cursor: pointer;
-  text-transform: uppercase;
-  margin: 0 0.5rem;
-  color: #333;
-  font-weight: 400;
-  font-size: 1.5rem;
-}
-.graph-title {
-  text-align: center;
-  font-size: 1.5rem;
-  font-weight: 600;
-}
-.graphs {
-  background-color: #f0f0f0;
-  padding-top: 1rem;
-}
-.graph {
-  box-shadow: 0 0 4px 1px rgb(51 51 51 / 20%);
-}
-.bars {
-  display: grid;
-  grid-template-columns: 10% 50% 15%;
-  justify-content: center;
-  align-items: center;
-  color: #333;
-  letter-spacing: .075rem;
-  grid-gap: .5rem .5rem;
-  margin: .5rem;
-  font-size: 1.35rem;
-  font-weight: 600;
-}
-.bars:first-child {
-  padding-top: 1rem;
-}
-.bars .bar {
-  background: orange;
-  border-radius: .2rem;
-  border: .1rem solid orange;
 }

@@ -1,16 +1,12 @@
 import React from 'react'
-import Context0 from './components/Context1'
+import Heading from './components/Heading'
+import Hexacolor from './components/Hexacolor'
 
-export const UserContext = React.createContext()
-export const ChallengeContext = React.createContext()
 function App() {
   return (
     <div>
-      <UserContext.Provider value={'Wemimo'}>
-        <ChallengeContext.Provider value={'30 Days of React'}>
-        <Context0 />
-        </ChallengeContext.Provider>
-      </UserContext.Provider>
+      <Heading />
+      <Hexacolor />
     </div>
   )
 }
