@@ -1,60 +1,185 @@
 body {
-  margin: 0;
-  font-family: "Poppins", sans-serif, "Roboto Slab";
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  box-sizing: border-box;
-  color: #283747 !important;
-  background-color: #f9fbfe;
+	margin: 0;
+	font-family: "Poppins", sans-serif, "Roboto Slab";
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	box-sizing: border-box;
+	color: #283747 !important;
+	background-color: #f9fbfe;
 
-  overflow-x: hidden;
+	overflow-x: hidden;
 }
 ::-webkit-scrollbar {
-  width: 15px;
+	width: 15px;
 }
 ::-webkit-scrollbar-thumb {
-  background: #61dbfb;
-  border-radius: 10px;
+	background: #61dbfb;
+	border-radius: 10px;
 }
 ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px #00f;
-  background: #4776e6;
-  background: linear-gradient(90deg, #8e54e9, #4776e6);
-  border-radius: 10px;
+	box-shadow: inset 0 0 5px #00f;
+	background: #4776e6;
+	background: linear-gradient(90deg, #8e54e9, #4776e6);
+	border-radius: 10px;
 }
 .title {
-  margin: 0 auto;
-  text-align: center;
-  line-height: 0.7;
+	margin: 0 auto;
+	text-align: center;
+	line-height: 0.7;
 }
 h1 {
-  font-size: 5rem;
-  font-weight: 400;
+	font-size: 5rem;
+	font-weight: 400;
 }
 p {
-  font-size: 2rem;
+	font-size: 2rem;
 }
 .gene {
-  width: 80%;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-evenly;
+	width: 80%;
+	margin: 0 auto;
+	margin-bottom: 4rem;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
 }
 input {
-  width: 60%;
-  color: #fff;
-  border: 1px #eadef5;
-  outline: none;
-  border-radius: 5px;
+	width: 60%;
+	height: 3rem;
+	margin-bottom: 1rem;
+	border: 1px #eadef5;
+	outline: none;
+	border-radius: 5px;
 }
 input:hover {
-  background-color: rgb(252, 236, 252);
-  border: none;
+	background-color: rgb(252, 236, 252);
+	border: none;
 }
-button {
-  background-color: #595dff;
-  color: #fff;
-  padding: 1rem 5rem;
-  border-radius: 5px;
-  border: none;
+.gene button {
+	background-color: #595dff;
+	color: #fff;
+	padding: 1rem 5rem;
+	border-radius: 5px;
+	border: none;
+}
+.colors-wrapper {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	width: 80%;
+	margin: auto;
+	text-align: center;
+}
+.color {
+	width: 10rem;
+	height: 12rem;
+	display: flex;
+	flex-direction: column;
+	font-family: Montserrat;
+	letter-spacing: 0.0625em;
+	justify-content: space-around;
+	align-items: center;
+	margin: 2px;
+	border-radius: 5px;
+	font-size: 22px;
+	padding: 30;
+	font-weight: 100;
+	color: #efefef;
+}
+.clip-div::before {
+	position: absolute;
+	display: inline-block;
+	min-width: 60px;
+	height: 25px;
+	top: -20px;
+	left: 60px;
+	right: 0;
+	color: #fff;
+	display: block;
+	background: rgba(70, 67, 67, 0.55);
+	font-weight: 500;
+	line-height: 25px;
+	border-radius: 2px;
+	font-size: 1rem;
+}
+.clip-div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	min-width: 3rem;
+	max-height: 3rem;
+	min-height: 3rem;
+	border-radius: 100%;
+	background: rgba(74, 77, 251, 0.25);
+	text-align: center;
+	color: #fff;
+	margin: 10px;
+}
+
+.copy:hover::before {
+	content: "Copy";
+	padding: 10px 15px;
+	border-radius: 3px;
+	font-weight: 500;
+}
+
+.copied::before {
+	content: "Copied";
+	padding: 10px 15px;
+	border-radius: 3px;
+	font-size: 1rem;
+	font-weight: 500;
+}
+
+@media screen and (max-width: 400px) {
+	.gene {
+		display: -webkit-box;
+		display: -moz-box;
+		display: -ms-flexbox;
+		display: -webkit-flex;
+		display: flex;
+		-webkit-box-orient: vertical;
+		-moz-box-orient: vertical;
+		-webkit-flex-direction: column;
+		-ms-flex-direction: column;
+		flex-direction: column;
+		text-align: center;
+	}
+	.gene button {
+		-webkit-box-ordinal-group: 2;
+		-moz-box-ordinal-group: 2;
+		-ms-flex-order: 2;
+		-webkit-order: 2;
+		order: 2;
+		width: 80%;
+	}
+	input {
+		-webkit-box-ordinal-group: 1;
+		-moz-box-ordinal-group: 1;
+		-ms-flex-order: 1;
+		-webkit-order: 1;
+		order: 1;
+		width: 80%;
+	}
+	#h1 {
+		font-size: 1.5rem !important;
+	}
+	#p {
+		font-size: 1rem !important;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.title {
+		width: 100%;
+	}
+	h1 {
+		font-size: 3rem;
+	}
+	.title p {
+		font-size: 2rem;
+	}
+	input {
+		height: 2rem;
+	}
 }
