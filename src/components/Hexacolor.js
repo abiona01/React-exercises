@@ -27,7 +27,7 @@ const Color = ({ color, style }) => {
 		setCopied(true);
 		setTimeout(() => {
 			setCopied(false);
-		}, 3000);
+		}, 1500);
 	};
 	const status = copied ? "copied" : "copy";
 	return (
@@ -58,7 +58,7 @@ const Colors = ({ colors }) => {
 
 const ColorGeneratorApp = () => {
 	const initialColors = generateColors(27);
-	const [colors, setColors] = useState(initialColors);
+	const [color, setColor] = useState(initialColors);
 	const [value, setValue] = useState("");
 	const onChange = (e) => {
 		if (Number(e.target.value)) {
@@ -68,9 +68,9 @@ const ColorGeneratorApp = () => {
 	const onClick = () => {
 		const n = Number(value);
 		if (value === "" || undefined) {
-			setColors(generateColors(27));
+			setColor(generateColors(27));
 		} else {
-			setColors(generateColors(n));
+			setColor(generateColors(n));
 		}
 	};
 	return (
@@ -80,7 +80,7 @@ const ColorGeneratorApp = () => {
 				<button onClick={onClick}> Generate </button>
 			</div>
 
-			<Colors colors={colors} />
+			<Colors colors={color} />
 		</div>
 	);
 };
