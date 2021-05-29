@@ -44,8 +44,21 @@ textarea {
 	border: none;
 	border-radius: 5px;
 }
-button {
+.red {
+	color: red;
+}
+.active {
 	background-color: rgb(146, 208, 240);
+	color: white;
+	height: 3rem;
+	padding: 0.5rem 1rem;
+	outline: none;
+	border-radius: 3px;
+	border: none;
+	font-size: 1rem;
+}
+.disabled {
+	background-color: red;
 	color: white;
 	height: 3rem;
 	padding: 0.5rem 1rem;

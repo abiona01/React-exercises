@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaUser } from "react-icons/fa";
 import { FaEdit } from "react-icons/fa";
 import { FaTrashAlt } from "react-icons/fa";
@@ -8,6 +8,14 @@ import { FaRegComment } from "react-icons/fa";
 
 function Twitter() {
 	const Tweetinput = () => {
+		const [state, setstate] = useState("");
+		let wordCount = 250 - state.length;
+		let buttonStatus = wordCount > 0 && wordCount <= 250;
+		let buttonClassName = buttonStatus ? "active" : "disabled";
+		const handleChange = (e) => {
+			const value = e.target.value;
+			setstate(value);
+		};
 		return (
 			<div className="tweet-input">
 				<textarea
@@ -15,8 +23,13 @@ function Twitter() {
 					placeholder="Tweet about 30 Days of React..."
 					cols="60"
 					rows="8"
+					value={state}
+					onChange={handleChange}
 				></textarea>
-				<button>Add Post</button>
+				<p className={wordCount < 0 ? "red " : "other"}>{wordCount}</p>
+				<button className={buttonClassName} disabled={!buttonStatus}>
+					Add Post
+				</button>
 			</div>
 		);
 	};
@@ -109,12 +122,22 @@ function Twitter() {
 			</ul>
 		);
 	};
-	// const Twitter = () => {
-	// 	const [tweet, setTweet] = useState(initialTweet);
-
-	// 	// for (i = 0; i < initialTweet.length; i++) {
-	// 	// 	setTweet(prevTweet => )
-	// 	// }
+	const Tweetaction = () => {
+		const [edit, setedit] = useState(false);
+		useEffect(() => {
+			editPost = () => {
+				setedit({ edit: true });
+			};
+		});
+	};
+	// const newTweet = {
+	// 	id: randomId(),
+	// 	user: "Anonymous User",
+	// 	username: "@anonymous",
+	// 	content: ""
+	// };
+	// const addTweet = (tweetArray) => {
+	// 	tweetArray.push(newTweet);
 	// };
 	return (
 		<>
