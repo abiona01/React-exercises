@@ -43,6 +43,11 @@ textarea {
 	background-color: rgb(252, 248, 243);
 	border: none;
 	border-radius: 5px;
+	outline: none;
+}
+.tweet-input p {
+	font-size: 0.6rem;
+	padding-top: 7rem;
 }
 .red {
 	color: red;
@@ -113,6 +118,12 @@ span {
 }
 .trash {
 	padding-left: 0.5rem;
+}
+.edit:hover {
+	color: rgb(78, 152, 189);
+}
+.trash:hover {
+	color: rgb(216, 5, 5);
 }
 .heart {
 	padding: 0 1rem;
